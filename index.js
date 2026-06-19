@@ -4,20 +4,36 @@
 // 4. npm install mongoose
 // == ENV ==
 // installing env package:- "npm install dotenv --save"
+// == BCRYPT ==
+// 6. "npm install bcrypt" package code
+// == Validator ==
+// 7. "npm i validator" package code
+// == JWT == 
+// 8. "npm install jsonwebtoken" package code
 
-const express = require("express") //first tin to set up inside ur index after installing then require.
+const express = require("express") 
 const app = express();
-require("dotenv").config() //After installing .env we have to require with ".config()" method.
-
-// 'process.env.' is added to the PORT to give available port number if declared port is not available when github. shown below
+const mongoose = require("mongoose")
+require("dotenv").config();
 const PORT = process.env.PORT || 3000
-const mongoose = require("mongoose") //after installing mongoose u then require it. Mongoose is used to establish a connnection with the database.
-const taskRouter = require("./routes/taskRouter")// this imported and require to be used as a middleware
+const authRouter = require("./routes/authRouter.js")
+const taskRouter = require("./routes/taskRouter")// taskRouter is imported and require to be used as a middleware
+const auth = require("./middlewares/authentication.js")
+const notfound = require("./utils/notfound.js")
+
+
 
 // Middlewares below;
-app.use(express.json())
-// app.use("/api/v1", taskRouter)// to use dis as a middleware u have to import it, then require and store in a variable name.
-app.use("/api/v1/tasks", taskRouter)// "/tasks is added to middleware as standard route domain"
+app.use(express.json());
+app.use("/api/v1", authRouter)
+app.use("/api/v1/tasks", auth, taskRouter)// "/tasks is added to middleware as standard route domain"
+app.get("/",(req, res) =>{
+  res.status(200).json({success:true, message: "server is live"})
+})
+app.use(notfound)
+
+
+
 
 
 // creating an establish to connect our server to the database i.e server should run wen connected to database.
