@@ -13,7 +13,7 @@ const taskSchema = new mongoose.Schema({
     },
     tag: {
         type: String,
-        enum: ["Week 1", "Week 2", "Week 3", "Week 4", "Week 5"]
+        enum: ["Urgent", "Important"]
     },
     createdby: {
         type: mongoose.Types.ObjectId, //this provide the user Id from the userSchema with reference from "User"

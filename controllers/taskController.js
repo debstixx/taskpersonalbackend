@@ -41,7 +41,11 @@ const updateTask = async (req, res) => {
     const {userId} = req.user;
     const {taskId} = req.params;
     try {
-      const  task = await Task.findOneAndUpdate({createdby: userId, _id: taskId}, req.body, {new: true}, {runValidators: true});
+      const  task = await Task.findOneAndUpdate(
+        {createdby: userId, _id: taskId}, 
+        req.body,
+        {new: true, runValidators: true}
+    );
       res.status(200).json({success: true, task})
     } catch (error) {
         res.json({error})

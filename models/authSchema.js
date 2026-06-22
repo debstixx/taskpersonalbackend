@@ -44,7 +44,7 @@ userSchema.methods.comparePassword = async function(userPassword){
     return isCorrect;
 }
 
-
+// function to generate token when user logIn
 userSchema.methods.generateToken = function (){
     return jwt.sign({userId: this._id, name: this.name}, process.env.jwt_secret, {expiresIn: "1d"})
 }

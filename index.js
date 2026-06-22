@@ -10,8 +10,11 @@
 // 7. "npm i validator" package code
 // == JWT == 
 // 8. "npm install jsonwebtoken" package code
+// == cors ==
+// 9. "npm install cors" package to link fornt end and backend
 
 const express = require("express") 
+const cors = require("cors");
 const app = express();
 const mongoose = require("mongoose")
 require("dotenv").config();
@@ -25,6 +28,7 @@ const notfound = require("./utils/notfound.js")
 
 // Middlewares below;
 app.use(express.json());
+app.use(cors());
 app.use("/api/v1", authRouter)
 app.use("/api/v1/tasks", auth, taskRouter)// "/tasks is added to middleware as standard route domain"
 app.get("/",(req, res) =>{

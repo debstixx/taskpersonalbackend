@@ -16,7 +16,7 @@ const register = async (req, res) => {
 }
 
 const login  = async (req, res) => {
-  // conditional statement to the re.body on the postman
+  // conditional statement to the req.body on the postman
     const {email, password} = req.body
     if (!email || !password) {
        return res.status(400).json({success:false, msg: "Please provide necessary information"}) 
@@ -52,4 +52,34 @@ const login  = async (req, res) => {
 }
 
 
-module.exports = {register, login}
+
+const updateProfile = async (req, res) => {
+    const { userId } = req.user; //request to get user id and it properties
+    const { name, password } = req.body;
+
+    try {
+        //find the user document by their unique ID
+        const user = await User.findById(userId);
+        if (!user) {
+            return res.status(404).json({ success: false, msg: "User records not found" });
+        }
+
+        //update wen user input info into each fields
+        if (name) user.name = name;
+        if (password) user.password = password; //his string gets picked up and hashed automatically by your pre-save schema hook!
+
+        await user.save();//save the updated document back to MongoDB
+
+        res.status(200).json({
+            success: true,
+            msg: "Profile credentials updated successfully"
+        });
+        
+    } catch (error) {
+        console.log(error);
+        const errors = handleError(error);
+        res.status(400).json(errors);
+    }
+}
+
+module.exports = {register, login, updateProfile}
