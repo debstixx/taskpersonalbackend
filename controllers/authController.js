@@ -52,7 +52,7 @@ const login  = async (req, res) => {
 }
 
 
-
+//Profile page where user can update name/password.
 const updateProfile = async (req, res) => {
     const { userId } = req.user; //request to get user id and it properties
     const { name, password } = req.body;
@@ -66,7 +66,7 @@ const updateProfile = async (req, res) => {
 
         //update wen user input info into each fields
         if (name) user.name = name;
-        if (password) user.password = password; //his string gets picked up and hashed automatically by your pre-save schema hook!
+        if (password) user.password = password; //this string gets picked up and hashed automatically by my pre-save schema hook!
 
         await user.save();//save the updated document back to MongoDB
 

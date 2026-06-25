@@ -1,5 +1,5 @@
- // 1. npm init -y
-// 2. npm install nodemon --save-dev
+// 1. npm init -y
+// // 2. npm install nodemon --save-dev
 // 3. npm install express
 // 4. npm install mongoose
 // == ENV ==
