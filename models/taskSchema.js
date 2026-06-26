@@ -18,11 +18,12 @@ const taskSchema = new mongoose.Schema({
         enum: ["Urgent", "Important"]
     },
 
-    // I apply a soft delete switch("isDeleted") to my schema to act as a toggle to hide data without permanently deleting the data.
+    // I apply a soft delete switch("isDeleted") to my schema to act as a switch to hide data without permanently deleting the data.
     isDeleted: {
     type: Boolean,
     default: false //'false' means when a user creates a new task, it's NOT deleted by default!
      },
+     
     createdby: {
         type: mongoose.Types.ObjectId, //this provide the user Id from the userSchema with reference from "User"
         ref: "User",
