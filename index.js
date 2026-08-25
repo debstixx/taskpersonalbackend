@@ -11,7 +11,7 @@
 // == JWT == 
 // 8. "npm install jsonwebtoken" package code
 // == cors ==
-// 9. "npm install cors" package to link fornt end and backend
+// 9. "npm install cors" package to link front end and backend
 
 const express = require("express") 
 const cors = require("cors");
@@ -22,7 +22,7 @@ const PORT = process.env.PORT || 3000
 const authRouter = require("./routes/authRouter.js")
 const taskRouter = require("./routes/taskRouter")// taskRouter is imported and require to be used as a middleware
 const auth = require("./middlewares/authentication.js")
-const notfound = require("./utils/notfound.js")
+const notFound = require("./utils/notfound.js")
 
 
 
@@ -34,7 +34,7 @@ app.use("/api/v1/tasks", auth, taskRouter)// "/tasks is added to middleware as s
 app.get("/",(req, res) =>{
   res.status(200).json({success:true, message: "server is live"})
 })
-app.use(notfound)
+app.use(notFound)
 
 
 
